@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">JsonExample</string>
+    <string name="id">Id:</string>
+    <string name="userid">userId:</string>
+    <string name="title">title:</string>
+    <string name="body">body:</string>
+</resources>
