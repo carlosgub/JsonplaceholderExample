@@ -62,9 +62,4 @@ class LandingActivity : AppCompatActivity() {
             startActivity(Intent(applicationContext,NewActivity::class.java))
         }
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.cancel()
-    }
 }

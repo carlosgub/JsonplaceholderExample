@@ -1,10 +1,14 @@
 package com.carlosgub.jsonexample.data
 
 import com.carlosgub.jsonexample.model.Post
+import io.reactivex.Observable
+import io.reactivex.Single
+import io.reactivex.plugins.RxJavaPlugins
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
@@ -19,6 +23,7 @@ object ApiClient {
         var builder: Retrofit.Builder = Retrofit.Builder()
             .baseUrl(API_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
 
         var httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
         httpClient.addInterceptor(interceptor())
@@ -38,7 +43,7 @@ object ApiClient {
 
     interface ServicesApiInterface{
         @GET("/posts")
-        fun posts(): Call<MutableList<Post>>
+        fun posts(): Single<MutableList<Post>>
 
         @GET
         fun getPost(@Url url:String): Call<Post>
